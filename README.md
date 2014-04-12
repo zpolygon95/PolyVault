@@ -6,7 +6,7 @@ but is likely to change in the future.
 
 Following is a list of it's functionalities, sorted first by language,
 then alphabetically. Obviously, this list will grow over time. However,
-I will make every effort to functionality is never lost.
+I will make every effort to ensure functionality is never lost.
 
 *   Java
     *   JSON objectifier: PolyVault/src/util/json/JSON*
