@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  *
@@ -188,11 +189,14 @@ public class JSONParser
         {
             text += r.readLine();
         }
+        text = cleanString(text);
         return parseObject(text);
     }
     
-    public static boolean writeFile(JSONObject contents, File location)
+    public static void writeFile(JSONObject contents, File location) throws IOException
     {
-        return false;
+        PrintWriter writer = new PrintWriter(location.getPath(), "UTF-8");
+        writer.print(contents);
+        writer.close();
     }
 }

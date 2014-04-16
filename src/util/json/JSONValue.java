@@ -102,6 +102,35 @@ public class JSONValue
         }
     }
     
+    public JSONValue(JSONObject o)
+    {
+        type = OBJECT;
+        objectValue = o;
+    }
+    
+    public JSONValue(JSONArray a)
+    {
+        type = ARRAY;
+        arrayValue = a;
+    }
+    
+    public JSONValue(double n)
+    {
+        type = NUMBER;
+        numberValue = n;
+    }
+    
+    public JSONValue(boolean b)
+    {
+        type = BOOLEAN;
+        boolValue = b;
+    }
+    
+    public JSONValue()
+    {
+        type = NULL;
+    }
+    
     public int getType()
     {
         return type;
@@ -200,31 +229,23 @@ public class JSONValue
     
     public String toString(int depth)
     {
+        String indent = Formatting.nSpaces(depth);
+        
         switch (type)
         {
             case STRING:
-                return nSpaces(depth) + getString();
+                return indent + getString();
             case NUMBER:
-                return nSpaces(depth) + Double.toString(getNumber());
+                return indent + Double.toString(getNumber());
             case OBJECT:
-                return getObject().toString(depth + 1);
+                return indent + "{\n" + getObject().toString(depth + 1) + indent + "}";
             case ARRAY:
-                return getArray().toString(depth + 1);
+                return indent + "[\n" + getArray().toString(depth + 1) + indent + "]";
             case BOOLEAN:
-                return nSpaces(depth) + (getBool() ? "true" : "false");
+                return indent + (getBool() ? "true" : "false");
             case NULL:
-                return nSpaces(depth) + "null";
+                return indent + "null";
         }
         return rawValue;
-    }
-    
-    public String nSpaces(int n)
-    {
-        String out = "";
-        for (int i = 0; i < n; i++)
-        {
-            out += " ";
-        }
-        return out;
     }
 }

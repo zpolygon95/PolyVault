@@ -42,22 +42,12 @@ public class JSONObject
     
     public String toString(int depth)
     {
-        String out = nSpaces(depth) + "{";
+        String out = "";
         for (JSONMember m : members)
         {
-            out += m.toString(depth + 1) + "\n";
+            out += m.toString(depth) + ",\n";
         }
-        out += nSpaces(depth) + "}";
-        return out;
-    }
-    
-    public String nSpaces(int n)
-    {
-        String out = "";
-        for (int i = 0; i < n; i++)
-        {
-            out += " ";
-        }
+        out = out.substring(0, out.length() - 2) + "\n";
         return out;
     }
 }

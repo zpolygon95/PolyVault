@@ -23,19 +23,9 @@ public class JSONMember
     
     public String toString(int depth)
     {
-        String out = "\"" + name + "\":";
-        out += (value.getType() == JSONValue.OBJECT || value.getType() == JSONValue.ARRAY) ? "\n" : "";
-        out += value.toString();
-        return out;
-    }
-    
-    public String nSpaces(int n)
-    {
-        String out = "";
-        for (int i = 0; i < n; i++)
-        {
-            out += " ";
-        }
+        int type = value.getType();
+        String out = Formatting.nSpaces(depth) + "\"" + name + "\":";
+        out += (type == JSONValue.ARRAY || type == JSONValue.OBJECT) ? "\n" + value.toString(depth) : value.toString();
         return out;
     }
 }
